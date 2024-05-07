@@ -61,6 +61,11 @@ namespace adonet_db_videogame
                 eseguitoConessione.Close();
             }
         }
+        public static Videogame CercaVideogame(int id)
+        {
+            
+        }
+
     }
 
 
