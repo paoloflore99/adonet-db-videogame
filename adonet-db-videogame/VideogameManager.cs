@@ -4,12 +4,13 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace adonet_db_videogame
 {
     public class Videogame
     {
-        string Name { get; set; }
+        public string Name { get; set; }
         string Overview { get; set; }
         DateTime Release_date { get; set; }
         DateTime Create_at { get; set; }
@@ -63,8 +64,9 @@ namespace adonet_db_videogame
         }
         public static Videogame CercaVideogame(int id)
         {
+
             using SqlConnection eseguitoConessione = new SqlConnection(DatabaseConesso);
-            
+            Videogame videogame = null;
             try
             {
                 eseguitoConessione.Open();
@@ -83,7 +85,7 @@ namespace adonet_db_videogame
                     DateTime update_at = Convert.ToDateTime(reader["release_date"]);
                     int software_house_id = Convert.ToInt32(reader["software_house_id"]);
 
-                    Videogame = new Videogame(name,overview, release_date,create_at,update_at,software_house_id );
+                    videogame = new Videogame(name,overview, release_date,create_at,update_at,software_house_id );
 
                 }
             }
@@ -95,6 +97,8 @@ namespace adonet_db_videogame
             {
                 eseguitoConessione.Close();
             }
+
+            return videogame;
 
         }
 
