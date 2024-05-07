@@ -4,7 +4,10 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            Console.WriteLine("inserisci videoggioco");
+            string iseritoGioco = Console.ReadLine();
+
+            Console.WriteLine("inserisci videoggioco");
         }
     }
 }
