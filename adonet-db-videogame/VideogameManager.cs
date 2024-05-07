@@ -11,11 +11,11 @@ namespace adonet_db_videogame
     public class Videogame
     {
         public string Name { get; set; }
-        string Overview { get; set; }
-        DateTime Release_date { get; set; }
-        DateTime Create_at { get; set; }
-        DateTime Update_at { get; set; }
-        int Software_house_id { get; set; }
+        public string Overview { get; set; }
+        public DateTime Release_date { get; set; }
+        public DateTime Create_at { get; set; }
+        public DateTime Update_at { get; set; }
+        public int Software_house_id { get; set; }
 
         public Videogame(string name, string overview, DateTime release_date, DateTime create_at, DateTime update_at , int software_house_id)
         {
@@ -66,11 +66,11 @@ namespace adonet_db_videogame
         {
 
             using SqlConnection eseguitoConessione = new SqlConnection(DatabaseConesso);
-            Videogame videogame = null;
+            Videogame videogameFound = null;
             try
             {
                 eseguitoConessione.Open();
-                string query = "SELECT * FROM Videogame WHERE id= @id";
+                string query = "SELECT * FROM videogames WHERE id= @id";
                 using SqlCommand cmd = new SqlCommand(query, eseguitoConessione);
                 cmd.Parameters.Add(new SqlParameter("@id", id));
                 //chat
@@ -85,7 +85,7 @@ namespace adonet_db_videogame
                     DateTime update_at = Convert.ToDateTime(reader["release_date"]);
                     int software_house_id = Convert.ToInt32(reader["software_house_id"]);
 
-                    videogame = new Videogame(name,overview, release_date,create_at,update_at,software_house_id );
+                    videogameFound = new Videogame(name,overview, release_date,create_at,update_at,software_house_id );
 
                 }
             }
@@ -98,7 +98,7 @@ namespace adonet_db_videogame
                 eseguitoConessione.Close();
             }
 
-            return videogame;
+            return videogameFound;
 
         }
 
