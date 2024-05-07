@@ -110,7 +110,7 @@ namespace adonet_db_videogame
             {
                 eseguitoConessione.Open();
                 using SqlCommand cmd = new SqlCommand(query, eseguitoConessione);
-                cmd.Parameters.Add(new SqlParameter("@i", id));
+                cmd.Parameters.Add(new SqlParameter("@id", id));
 
                 int Eleminazione = cmd.ExecuteNonQuery();
                 if ( Eleminazione > 0 )
