@@ -86,7 +86,7 @@ namespace adonet_db_videogame
                     int software_house_id = Convert.ToInt32(reader["software_house_id"]);
 
                     videogameFound = new Videogame(name,overview, release_date,create_at,update_at,software_house_id );
-
+                     
                 }
             }
             catch (Exception ex)
