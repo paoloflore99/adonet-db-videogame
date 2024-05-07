@@ -131,7 +131,25 @@ namespace adonet_db_videogame
                 eseguitoConessione.Close ();
             }
         }
-    }
+
+        public static Videogame CercaVideogameperNome(string name)
+        {
+
+
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                
+            }
+        }
+
 
 
 }
