@@ -39,3 +39,15 @@ using Microsoft.VisualBasic;
         Console.WriteLine(ex.Message);
     }
 }
+{
+    try
+    {
+        Console.Write("inserisci id VIdeogames da eliminare : ");
+        int id = int.Parse(Console.ReadLine());
+        VideogameManager.EliminaVideogames(id);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
+}

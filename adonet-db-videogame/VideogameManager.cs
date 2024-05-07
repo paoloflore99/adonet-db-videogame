@@ -104,7 +104,7 @@ namespace adonet_db_videogame
 
         public static void EliminaVideogames(int id)
         {
-            string query = "DELITE FROM videogames WHERE id= @id";
+            string query = "DELETE FROM videogames WHERE id= @id";
             using SqlConnection eseguitoConessione = new SqlConnection(DatabaseConesso);
             try
             {
@@ -128,7 +128,7 @@ namespace adonet_db_videogame
             }
             finally
             {
-                
+                eseguitoConessione.Close ();
             }
         }
     }
