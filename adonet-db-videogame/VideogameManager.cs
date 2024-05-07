@@ -102,6 +102,35 @@ namespace adonet_db_videogame
 
         }
 
+        public static void EliminaVideogames(int id)
+        {
+            string query = "DELITE FROM videogames WHERE id= @id";
+            using SqlConnection eseguitoConessione = new SqlConnection(DatabaseConesso);
+            try
+            {
+                eseguitoConessione.Open();
+                using SqlCommand cmd = new SqlCommand(query, eseguitoConessione);
+                cmd.Parameters.Add(new SqlParameter("@i", id));
+
+                int Eleminazione = cmd.ExecuteNonQuery();
+                if ( Eleminazione > 0 )
+                {
+                    Console.WriteLine("eliminazione ggioco avvenuta con sucesso ");
+                }
+                else
+                {
+                    Console.WriteLine("ggioco non trovato ");
+                }
+            }
+            catch (Exception ex)
+            {
+            Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                
+            }
+        }
     }
 
 
