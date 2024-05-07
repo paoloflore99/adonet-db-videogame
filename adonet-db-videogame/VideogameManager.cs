@@ -63,7 +63,39 @@ namespace adonet_db_videogame
         }
         public static Videogame CercaVideogame(int id)
         {
+            using SqlConnection eseguitoConessione = new SqlConnection(DatabaseConesso);
             
+            try
+            {
+                eseguitoConessione.Open();
+                string query = "SELECT * FROM Videogame WHERE id= @id";
+                using SqlCommand cmd = new SqlCommand(query, eseguitoConessione);
+                cmd.Parameters.Add(new SqlParameter("@id", id));
+                //chat
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    string name = reader["name"].ToString();
+                    string overview = reader["overview"].ToString();
+                    DateTime release_date= Convert.ToDateTime(reader["release_date"]);
+                    DateTime create_at = Convert.ToDateTime(reader["release_date"]);
+                    DateTime update_at = Convert.ToDateTime(reader["release_date"]);
+                    int software_house_id = Convert.ToInt32(reader["software_house_id"]);
+
+                    Videogame = new Videogame(name,overview, release_date,create_at,update_at,software_house_id );
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                eseguitoConessione.Close();
+            }
+
         }
 
     }
