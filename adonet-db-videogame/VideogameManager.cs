@@ -1,13 +1,67 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace adonet_db_videogame
 {
-    internal class VideogameManager
+    public class Videogame
+    {
+        string Name { get; set; }
+        string Overview { get; set; }
+        DateTime Release_date { get; set; }
+        DateTime Create_at { get; set; }
+        DateTime Update_at { get; set; }
+        int Software_house_id { get; set; }
+
+        public Videogame(string name, string overview, DateTime release_date, DateTime create_at, DateTime update_at , int software_house_id)
+        {
+            this.Name = name;
+            this.Overview = overview;
+            this.Release_date = release_date;
+            this.Create_at = create_at;
+            this.Update_at = update_at;
+            this.Software_house_id = software_house_id;
+        }
+    }
+
+
+    public static class VideogameManager
     {
 
+       public static  string DatabaseConesso = "Data Source=localhost;Initial Catalog=db-videogames-query;Integrated Security=True";
+
+       public static void InserisciVideogame( string name, string overview, DateTime release_date, DateTime create_at, DateTime update_at, int software_house_id)
+        {
+            Videogame NuovoGioco = new Videogame(name, overview, release_date, create_at, update_at, software_house_id);
+            using SqlConnection eseguitoConessione =new SqlConnection(DatabaseConesso);
+
+            try
+            {
+                eseguitoConessione.Open();
+                string query = "INSERT INTO videogames(name , overview , release_date , created_at ,updated_at , software_house_id) VALUES (@name , @overview , @release_date , @create_at , @update_at , @software_house_id)";
+                using SqlCommand cmd = new SqlCommand(query, eseguitoConessione);
+                cmd.Parameters.Add(new SqlParameter("@name", name));
+                cmd.Parameters.Add(new SqlParameter("@overview", overview));
+                cmd.Parameters.Add(new SqlParameter("@release_date", release_date));
+                cmd.Parameters.Add(new SqlParameter("@create_at", create_at));
+                cmd.Parameters.Add(new SqlParameter("@update_at", update_at));
+                cmd.Parameters.Add(new SqlParameter("@software_house_id" , software_house_id));
+
+                int efect = cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);  
+            }
+            finally
+            {
+                eseguitoConessione.Close();
+            }
+        }
     }
+
+
 }
